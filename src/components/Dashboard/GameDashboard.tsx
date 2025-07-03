@@ -9,11 +9,20 @@ import { useGameStore } from "@/store/gameStore";
 
 export default function GameDashboard() {
   const player = useGameStore((s) => s.player);
+  const inventoryLoading = useGameStore((s) => s.inventoryLoading);
 
   if (!player) {
     return (
       <div className="text-white text-center mt-10">
         <p className="text-xl">🚪 Please log in or create a character to play.</p>
+      </div>
+    );
+  }
+
+  if (inventoryLoading) {
+    return (
+      <div className="text-white text-center mt-10">
+        <p className="text-xl animate-pulse">⏳ Loading your adventure data...</p>
       </div>
     );
   }
@@ -26,12 +35,12 @@ export default function GameDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <GatheringPanel />
-        <CraftingPanel />
+        <GatheringPanel player={player} />
+        <CraftingPanel player={player} />
       </div>
 
       <div>
-        <BlueprintPanel />
+        <BlueprintPanel player={player} />
       </div>
     </div>
   );
