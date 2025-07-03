@@ -1,6 +1,16 @@
+"use client";
 import { useQuery } from "@tanstack/react-query";
 import api from "../lib/apiClient";
 
+import GameDashboard from "@/components/Dashboard/GameDashboard";
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 py-10">
+      <GameDashboard />
+    </main>
+  );
+}
 export default function Home() {
   const { data, error, isLoading } = useQuery(["elements"], () =>
     api.get("/elements").then((res) => res.data)
