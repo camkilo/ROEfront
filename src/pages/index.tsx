@@ -1,41 +1,50 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import api from "../lib/apiClient";
 
-import GameDashboard from "@/components/Dashboard/GameDashboard";
+import React, { useState } from "react";
+import CharacterEntry from "@/components/CharacterEntry";
+import GameDashboard from "@/components/GameDashboard";
+import { useGameStore } from "@/store/gameStore";
 
-export default function Home() {
+export default function AppRoot() {
+  const player = useGameStore((s) => s.player);
+  const [loading, setLoading] = useState(false);
+  const [entryError, setEntryError] = useState<string | null>(null);
+
+  // Called when player successfully enters name
+  const handleEnter = async (playerName: string) => {
+    setLoading(true);
+    setEntryError(null);
+    try {
+      // Could do extra async setup here if needed
+      // For now just a pause simulating load:
+      await new Promise((r) => setTimeout(r, 300));
+    } catch (e: any) {
+      setEntryError(e.message || "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white text-xl">
+        Loading your adventure...
+      </div>
+    );
+  }
+
+  if (!player) {
+    return <CharacterEntry onEnter={handleEnter} />;
+  }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 py-10">
+    <>
+      {entryError && (
+        <div className="bg-red-600 text-white p-2 text-center">
+          Error: {entryError}
+        </div>
+      )}
       <GameDashboard />
-    </main>
-  );
-}
-export default function Home() {
-  const { data, error, isLoading } = useQuery(["elements"], () =>
-    api.get("/elements").then((res) => res.data)
-  );
-
-  if (isLoading) return <div>Loading elements...</div>;
-  if (error) return <div>Error loading elements</div>;
-
-  return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <h1 className="text-5xl font-extrabold mb-6 text-primary">
-        Realm of Echoes - Elements Overview
-      </h1>
-      <ul className="grid grid-cols-4 gap-4">
-        {data.map((el: any) => (
-          <li
-            key={el.symbol}
-            className="bg-secondary rounded-lg p-4 text-center shadow hover:shadow-lg transition"
-          >
-            <div className="text-2xl font-bold">{el.symbol}</div>
-            <div className="text-lg">{el.name}</div>
-            <div className="text-sm">Atomic #{el.atomic_number}</div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 }
