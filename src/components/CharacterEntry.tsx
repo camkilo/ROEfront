@@ -1,34 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useGameStore } from "@/store/gameStore";
-// In your page.tsx or HomePage wrapper
-
-import { useGameStore } from "@/store/gameStore";
-import CharacterEntry from "@/components/CharacterEntry";
-import GameDashboard from "@/components/GameDashboard";
 import { fetchInventory, fetchXP, fetchBlueprints, fetchFactionClass } from "@/lib/api/player";
 
-export default function HomePage() {
-  const player = useGameStore((s) => s.player);
-
-  const loadPlayerData = async (playerName: string) => {
-    await fetchInventory(playerName);
-    await fetchXP(playerName);
-    await fetchBlueprints(playerName);
-    await fetchFactionClass(playerName);
-    // Add more as we build out
-  };
-
-  return player ? (
-    <GameDashboard />
-  ) : (
-    <CharacterEntry onEnter={(name) => loadPlayerData(name)} />
-  );
-}
 export default function CharacterEntry({
   onEnter,
 }: {
-  onEnter: () => void;
+  onEnter: (playerName: string) => Promise<void>;
 }) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -46,7 +24,7 @@ export default function CharacterEntry({
 
     try {
       // Check if player exists
-      const checkRes = await fetch(`/api/users?name=${name}`);
+      const checkRes = await fetch(`/api/users?name=${encodeURIComponent(name)}`);
       const checkData = await checkRes.json();
 
       if (!checkData.exists) {
@@ -61,9 +39,11 @@ export default function CharacterEntry({
         if (!createRes.ok) throw new Error(createData.error || "Error creating player.");
       }
 
-      // Success: set player and move on
+      // Success: set player in Zustand
       setPlayer(name);
-      onEnter();
+
+      // Load all player data
+      await onEnter(name);
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
@@ -78,10 +58,13 @@ export default function CharacterEntry({
         <p className="text-zinc-400 mb-6">Enter your adventurer name to begin:</p>
 
         <input
+          type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Alchemist42"
           className="w-full px-4 py-2 mb-4 rounded bg-zinc-700 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          disabled={loading}
+          autoFocus
         />
 
         <button
