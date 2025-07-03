@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { useGameStore } from "@/store/gameStore";
 import {
@@ -11,7 +12,7 @@ import {
 export default function CharacterEntry({
   onEnter,
 }: {
-  onEnter?: (playerName: string) => Promise<void>;
+  onEnter: (playerName: string) => Promise<void>;
 }) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -29,7 +30,9 @@ export default function CharacterEntry({
 
     try {
       // Check if player exists
-      const checkRes = await fetch(`/api/users?name=${encodeURIComponent(name)}`);
+      const checkRes = await fetch(
+        `/api/users?name=${encodeURIComponent(name.trim())}`
+      );
       const checkData = await checkRes.json();
 
       if (!checkData.exists) {
@@ -37,25 +40,28 @@ export default function CharacterEntry({
         const createRes = await fetch("/api/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name }),
+          body: JSON.stringify({ name: name.trim() }),
         });
-        const createData = await createRes.json();
 
-        if (!createRes.ok) throw new Error(createData.error || "Error creating player.");
+        if (!createRes.ok) {
+          const createData = await createRes.json();
+          throw new Error(createData.error || "Error creating player.");
+        }
       }
 
-      // Set player in Zustand store
-      setPlayer(name);
+      // Success: set player in Zustand store
+      setPlayer(name.trim());
 
-      // Fully hydrate player state before proceeding
-      await fetchInventory(name);
-      await fetchXP(name);
-      await fetchBlueprints(name);
-      await fetchFactionClass(name);
+      // Load all player data concurrently
+      await Promise.all([
+        fetchInventory(name.trim()),
+        fetchXP(name.trim()),
+        fetchBlueprints(name.trim()),
+        fetchFactionClass(name.trim()),
+      ]);
 
-      // Optional callback for parent components
-      if (onEnter) await onEnter(name);
-
+      // Callback for parent component to proceed
+      await onEnter(name.trim());
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
@@ -77,6 +83,9 @@ export default function CharacterEntry({
           className="w-full px-4 py-2 mb-4 rounded bg-zinc-700 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           disabled={loading}
           autoFocus
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleStart();
+          }}
         />
 
         <button
