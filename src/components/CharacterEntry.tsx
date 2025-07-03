@@ -1,12 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { useGameStore } from "@/store/gameStore";
-import { fetchInventory, fetchXP, fetchBlueprints, fetchFactionClass } from "@/lib/api/player";
+import {
+  fetchInventory,
+  fetchXP,
+  fetchBlueprints,
+  fetchFactionClass,
+} from "@/lib/api/player";
 
 export default function CharacterEntry({
   onEnter,
 }: {
-  onEnter: (playerName: string) => Promise<void>;
+  onEnter?: (playerName: string) => Promise<void>;
 }) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -39,11 +44,18 @@ export default function CharacterEntry({
         if (!createRes.ok) throw new Error(createData.error || "Error creating player.");
       }
 
-      // Success: set player in Zustand
+      // Set player in Zustand store
       setPlayer(name);
 
-      // Load all player data
-      await onEnter(name);
+      // Fully hydrate player state before proceeding
+      await fetchInventory(name);
+      await fetchXP(name);
+      await fetchBlueprints(name);
+      await fetchFactionClass(name);
+
+      // Optional callback for parent components
+      if (onEnter) await onEnter(name);
+
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
