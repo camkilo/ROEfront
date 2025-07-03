@@ -1,7 +1,30 @@
 "use client";
 import React, { useState } from "react";
 import { useGameStore } from "@/store/gameStore";
+// In your page.tsx or HomePage wrapper
 
+import { useGameStore } from "@/store/gameStore";
+import CharacterEntry from "@/components/CharacterEntry";
+import GameDashboard from "@/components/GameDashboard";
+import { fetchInventory, fetchXP, fetchBlueprints, fetchFactionClass } from "@/lib/api/player";
+
+export default function HomePage() {
+  const player = useGameStore((s) => s.player);
+
+  const loadPlayerData = async (playerName: string) => {
+    await fetchInventory(playerName);
+    await fetchXP(playerName);
+    await fetchBlueprints(playerName);
+    await fetchFactionClass(playerName);
+    // Add more as we build out
+  };
+
+  return player ? (
+    <GameDashboard />
+  ) : (
+    <CharacterEntry onEnter={(name) => loadPlayerData(name)} />
+  );
+}
 export default function CharacterEntry({
   onEnter,
 }: {
