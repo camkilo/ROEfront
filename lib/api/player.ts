@@ -1,10 +1,22 @@
 import { useGameStore } from "@/store/gameStore";
 
+interface BlueprintsData {
+  [key: string]: {
+    ingredients: string[];
+    discovered_by: string[];
+  };
+}
+
+interface FactionClassData {
+  faction: string | null;
+  player_class: string | null;
+}
+
 // 🔁 Fetch inventory and known items, with optional loading state
 export const fetchInventory = async (player: string) => {
   const set = useGameStore.getState();
 
-  set.setInventoryLoading?.(true); // optional: set loading if defined
+  set.setInventoryLoading?.(true);
 
   try {
     const res = await fetch(`/api/inventory?player=${encodeURIComponent(player)}`);
@@ -46,7 +58,7 @@ export const fetchBlueprints = async (player: string) => {
     const res = await fetch(`/api/blueprints?player=${encodeURIComponent(player)}`);
     if (!res.ok) throw new Error(`Failed to fetch blueprints: ${res.statusText}`);
 
-    const data = await res.json();
+    const data: BlueprintsData = await res.json();
 
     set.setBlueprints?.(data || {});
   } catch (err) {
@@ -62,7 +74,7 @@ export const fetchFactionClass = async (player: string) => {
     const res = await fetch(`/api/player_faction_class?player=${encodeURIComponent(player)}`);
     if (!res.ok) throw new Error(`Failed to fetch faction/class: ${res.statusText}`);
 
-    const data = await res.json();
+    const data: FactionClassData = await res.json();
 
     set.setFaction?.(data.faction || null);
     set.setPlayerClass?.(data.player_class || null);
