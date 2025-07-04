@@ -1,5 +1,5 @@
-import BlueprintPanel from "@/components/Blueprints/BlueprintPanel";
-import AppShell from "@/components/Layout/AppShell";
+import BlueprintPanel from "../../src/components/Blueprints/BlueprintPanel";
+import AppShell from "../../src/components/Layout/AppShell";
 
 export default function BlueprintPage() {
   return (
