@@ -7,10 +7,11 @@ type GameState = {
   xp: number;
   level: number;
   inventoryLoading: boolean;
-  blueprints: Record<string, any>; // blueprint data keyed by blueprint id
+  blueprints: Record<string, any>;
   faction: string | null;
-  classType: string | null;        // renamed from playerClass to classType
-  zone: string | null;             // NEW
+  playerClass: string | null;
+  classType: string | null;
+  zone: string | null;
 
   // Setters
   setPlayer: (player: string) => void;
@@ -21,8 +22,9 @@ type GameState = {
   setInventoryLoading: (loading: boolean) => void;
   setBlueprints: (blueprints: Record<string, any>) => void;
   setFaction: (faction: string | null) => void;
-  setClassType: (classType: string | null) => void;  // renamed setter
-  setZone: (zone: string | null) => void;            // NEW
+  setPlayerClass: (playerClass: string | null) => void;
+  setClassType: (classType: string | null) => void;
+  setZone: (zone: string | null) => void;
 };
 
 export const useGameStore = create<GameState>((set) => ({
@@ -34,8 +36,9 @@ export const useGameStore = create<GameState>((set) => ({
   inventoryLoading: false,
   blueprints: {},
   faction: null,
-  classType: null,    // renamed
-  zone: null,         // NEW
+  playerClass: null,
+  classType: null,
+  zone: null,
 
   setPlayer: (player) => set({ player }),
   setInventory: (items) => set({ inventory: items }),
@@ -45,6 +48,7 @@ export const useGameStore = create<GameState>((set) => ({
   setInventoryLoading: (loading) => set({ inventoryLoading: loading }),
   setBlueprints: (blueprints) => set({ blueprints }),
   setFaction: (faction) => set({ faction }),
-  setClassType: (classType) => set({ classType }),    // renamed setter
-  setZone: (zone) => set({ zone }),                    // NEW setter
+  setPlayerClass: (playerClass) => set({ playerClass }),
+  setClassType: (classType) => set({ classType }),
+  setZone: (zone) => set({ zone }),
 }));
