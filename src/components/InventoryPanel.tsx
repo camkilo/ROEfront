@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { fetchInventory } from "../../lib/api/player";
-import { useGameStore } from "./store/gameStore";
+import { useGameStore } from './store/GameStore';
 
 export default function InventoryPanel({ player }: { player: string }) {
   const inventory = useGameStore((s) => s.inventory);
