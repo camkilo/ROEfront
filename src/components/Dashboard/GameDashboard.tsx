@@ -5,7 +5,7 @@ import InventoryPanel from "../InventoryPanel";
 import GatheringPanel from "../Gathering/GatheringPanel";
 import CraftingPanel from "../Crafting/CraftingPanel";
 import BlueprintPanel from "../Blueprints/BlueprintPanel";
-import { useGameStore } from "../../store/gameStore";
+import { useGameStore } from "../store/gameStore";
 
 export default function GameDashboard() {
   const player = useGameStore((s) => s.player);
