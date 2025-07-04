@@ -1,3 +1,4 @@
+"use client";
 import AppShell from "../../src/components/Layout/AppShell";
 import InventoryPanel from "../../src/components/InventoryPanel";
 import { useGameStore } from "../../src/components/store/GameStore";
