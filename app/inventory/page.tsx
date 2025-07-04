@@ -1,5 +1,5 @@
-import AppShell from "../../components/Layout/AppShell";
-import InventoryPanel from "../../components/Inventory/InventoryPanel";
+import AppShell from "../../src/components/Layout/AppShell";
+import InventoryPanel from "../../src/components/Inventory/InventoryPanel";
 
 export default function InventoryPage() {
   return (
