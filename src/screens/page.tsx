@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import CharacterEntry from "@/components/CharacterEntry";
-import GameDashboard from "@/components/GameDashboard";
-import { useGameStore } from "@/store/gameStore";
+import CharacterEntry from "../components/CharacterEntry";
+import GameDashboard from "../components/Dashboard/GameDashboard";
+import { useGameStore } from "../components/store/GameStore";
 
 export default function AppRoot() {
   const player = useGameStore((s) => s.player);
