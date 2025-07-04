@@ -10,7 +10,7 @@ export default function CraftingPage() {
   return (
     <AppShell>
       <main className="min-h-screen p-10 bg-gradient-to-br from-zinc-900 to-zinc-800">
-<BlueprintPanel player={player ?? ""} />
+<CraftingPanel player={player ?? ""} />
       </main>
     </AppShell>
   );
