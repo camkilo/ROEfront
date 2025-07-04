@@ -1,4 +1,4 @@
-import { useGameStore } from "../../components/store/gameStore";
+import { usePlayerStore } from '../../store/usePlayerStore';
 
 export const craftItem = async (player: string, elements: string[]) => {
   const res = await fetch("/api/craft", {
