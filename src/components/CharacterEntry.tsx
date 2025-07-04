@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore } from "../store/gameStore";
 import {
   fetchInventory,
   fetchXP,
   fetchBlueprints,
   fetchFactionClass,
-} from "@/lib/api/player";
+} from "../../lib/api/player";
 
 export default function CharacterEntry({
   onEnter,
