@@ -1,6 +1,6 @@
 import GatheringPanel from "../../src/components/Gathering/GatheringPanel";
 import AppShell from "../../src/components/Layout/AppShell";
-import { useGameStore } from "../../src/components/store/gameStore";
+import { useGameStore } from "../../src/store/gameStore";
 
 export default function GatheringPage() {
   
