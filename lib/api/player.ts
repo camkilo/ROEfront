@@ -1,4 +1,4 @@
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore } from "../../src/components/store/GameStore";
 
 interface BlueprintsData {
   [key: string]: {
