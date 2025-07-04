@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { fetchXP } from "@/lib/api/player";
-import { useGameStore } from "@/store/gameStore";
+import { fetchXP } from "../../lib/api/player";
+import { useGameStore } from "./store/GameStore";
 
 export default function XPDisplay({ player }: { player: string }) {
   const xp = useGameStore((s) => s.xp);
