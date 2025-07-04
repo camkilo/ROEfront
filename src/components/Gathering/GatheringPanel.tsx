@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGameStore } from "../../store/gameStore";
+import { useGameStore } from "../../src/components/store/GameStore";
 
 export default function GatheringPanel({ player }: { player: string }) {
   const [biome, setBiome] = useState("");
