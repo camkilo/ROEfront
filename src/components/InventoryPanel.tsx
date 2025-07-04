@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { fetchInventory } from "lib/api/player";
-import { useGameStore } from "../../store/gameStore";
+import { fetchInventory } from "../../lib/api/player";
+import { useGameStore } from "./store/gameStore";
 
 export default function InventoryPanel({ player }: { player: string }) {
   const inventory = useGameStore((s) => s.inventory);
