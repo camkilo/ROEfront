@@ -3,7 +3,7 @@
 
 import { ReactNode, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useGameStore } from "../../store/GameStore";
+import { useGameStore } from "../store/GameStore";
 
 type Props = {
   children: ReactNode;
