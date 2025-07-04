@@ -27,7 +27,18 @@ export default function LoginPage() {
     try {
       if (mode === "login") {
         const res = await api.post("/login", { username, password });
-        setName(res.data.username);
+setName(res.data.player); // or res.data.username
+
+usePlayerStore.getState().setInventory(res.data.inventory || []);
+usePlayerStore.getState().setKnownItems(res.data.known_items || []);
+usePlayerStore.getState().setKnownBlueprints?.(res.data.known_blueprints || []);
+usePlayerStore.getState().setXP?.(res.data.xp || 0);
+usePlayerStore.getState().setLevel?.(res.data.level || 1);
+usePlayerStore.getState().setFaction?.(res.data.faction || null);
+usePlayerStore.getState().setClassType?.(res.data.classType || null);
+usePlayerStore.getState().setZone?.(res.data.zone || "starter-zone");
+
+localStorage.setItem("playerName", res.data.player); // Persist player
         localStorage.setItem("playerName", res.data.username);
         router.push("/");
       } else {
