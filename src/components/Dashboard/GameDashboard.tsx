@@ -1,11 +1,11 @@
 "use client";
 
-import XPDisplay from "../components/XPDisplay";
-import InventoryPanel from "../components/InventoryPanel";
-import GatheringPanel from "../components/Gathering/GatheringPanel";
-import CraftingPanel from "../components/Crafting/CraftingPanel";
-import BlueprintPanel from "../components/Blueprints/BlueprintPanel";
-import { useGameStore } from "../../components/store/gameStore";
+import XPDisplay from "../XPDisplay";
+import InventoryPanel from "../InventoryPanel";
+import GatheringPanel from "../Gathering/GatheringPanel";
+import CraftingPanel from "../Crafting/CraftingPanel";
+import BlueprintPanel from "../Blueprints/BlueprintPanel";
+import { useGameStore } from "../../store/gameStore";
 
 export default function GameDashboard() {
   const player = useGameStore((s) => s.player);
