@@ -2,16 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    styledComponents: false,
-  },
-  experimental: {
-    appDir: false
+    styledComponents: false, // ✅ keep if using styled-components (optional)
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "**", // ✅ allows images from any domain
       },
     ],
   },
