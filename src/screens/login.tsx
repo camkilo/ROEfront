@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Button } from "../components/ui/button";
 
 export default function LoginPage() {
-  const setName = usePlayerStore((state) => state.setName);
+  const setName = usePlayerStore((state) => state.setPlayer);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"login" | "register">("login");
