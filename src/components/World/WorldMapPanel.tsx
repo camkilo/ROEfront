@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchWorldMap } from "../../../../lib/api/world";
+import { fetchWorldMap } from "../../../lib/api/world";
 
 export default function WorldMapPanel() {
   const [zones, setZones] = useState<any>({});
