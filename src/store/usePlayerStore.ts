@@ -4,6 +4,7 @@ interface PlayerState {
   player: string;
   inventory: string[];
   knownItems: string[];
+  knownBlueprints: string[]; // ✅ new
   xp: number;
   level: number;
   zone: string;
@@ -13,6 +14,7 @@ interface PlayerState {
   setPlayer: (name: string) => void;
   setInventory: (inv: string[]) => void;
   setKnownItems: (items: string[]) => void;
+  setKnownBlueprints: (bps: string[]) => void; // ✅ new
   setXP: (xp: number) => void;
   setLevel: (lvl: number) => void;
   setZone: (zone: string) => void;
@@ -26,6 +28,7 @@ export const usePlayerStore = create<PlayerState>((set) => ({
   player: "",
   inventory: [],
   knownItems: [],
+  knownBlueprints: [], // ✅ new
   xp: 0,
   level: 1,
   zone: "",
@@ -35,6 +38,7 @@ export const usePlayerStore = create<PlayerState>((set) => ({
   setPlayer: (name) => set({ player: name }),
   setInventory: (inv) => set({ inventory: inv }),
   setKnownItems: (items) => set({ knownItems: items }),
+  setKnownBlueprints: (bps) => set({ knownBlueprints: bps }), // ✅ new
   setXP: (xp) => set({ xp }),
   setLevel: (lvl) => set({ level: lvl }),
   setZone: (zone) => set({ zone }),
