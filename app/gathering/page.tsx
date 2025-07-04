@@ -1,5 +1,5 @@
-import GatheringPanel from "../components/Gathering/GatheringPanel";
-import AppShell from "../components/Layout/AppShell";
+import GatheringPanel from "../../components/Gathering/GatheringPanel";
+import AppShell from "../../components/Layout/AppShell";
 
 export default function GatheringPage() {
   return (
