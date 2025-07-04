@@ -20,6 +20,8 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
+    "@types/react": "^18.0.38",           // TypeScript React types (must-have for TS projects)
+    "@types/node": "^20.4.2",             // TypeScript Node.js types (must-have for TS projects)
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.38",
     "typescript": "^5.4.5",
