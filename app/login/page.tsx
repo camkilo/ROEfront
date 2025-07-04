@@ -4,7 +4,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useGameStore } from "../../store/GameStore";
+import { useGameStore } from "../../src/components/store/GameStore";
 
 export default function LoginPage() {
   const router = useRouter();
