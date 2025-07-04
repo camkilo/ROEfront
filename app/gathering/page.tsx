@@ -1,3 +1,4 @@
+"use client";
 import GatheringPanel from "../../src/components/Gathering/GatheringPanel";
 import AppShell from "../../src/components/Layout/AppShell";
 import { useGameStore } from "../../src/components/store/GameStore";
