@@ -1,4 +1,4 @@
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore } from "../../components/store/GameStore";
 
 export const gatherFromBiome = async (player: string, biome: string) => {
   const res = await fetch(`/api/gather?player=${player}&biome=${biome}`);
