@@ -1,10 +1,26 @@
 {
+{
   "compilerOptions": {
-    "baseUrl": "./src", // <== crucial for @/ to work
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
-    }
+      "@/*": ["./src/*"],
+      "@lib/*": ["./lib/*"]
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "incremental": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   },
-  "include": ["next-env.d.ts", "src"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
