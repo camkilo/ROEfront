@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { useGameStore } from "../store/GameStore";
-import { craftItem } from "../../lib/api/craft";
 
-export default function CraftingPanel() {
-  const player = useGameStore((s) => s.player);
+import React, { useState } from "react";
+import { craftItem } from "../../lib/api/craft";
+import { useGameStore } from "../store/GameStore";
+
+type Props = {
+  player: string;
+};
+
+export default function CraftingPanel({ player }: Props) {
   const inventory = useGameStore((s) => s.inventory);
   const [selected, setSelected] = useState<string[]>([]);
   const [result, setResult] = useState<string | null>(null);
@@ -57,7 +61,10 @@ export default function CraftingPanel() {
             key={`${el}-${i}`}
             onClick={() => toggleSelect(el)}
             aria-pressed={selected.includes(el)}
-            disabled={selected.filter(s => s === el).length >= inventory.filter(inv => inv === el).length}
+            disabled={
+              selected.filter((s) => s === el).length >=
+              inventory.filter((inv) => inv === el).length
+            }
             className={`border rounded px-2 py-1 text-sm ${
               selected.includes(el)
                 ? "bg-green-500 text-black"
