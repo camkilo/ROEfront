@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore } from "@/store/usePlayerstore";
 import { craftItem } from "@/lib/api/craft";
 
 export default function CraftingPanel() {
