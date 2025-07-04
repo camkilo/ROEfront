@@ -1,5 +1,5 @@
-import CraftingPanel from "@/components/Crafting/CraftingPanel";
-import AppShell from "@/components/Layout/AppShell";
+import CraftingPanel from "../../src/components/Crafting/CraftingPanel";
+import AppShell from "../../src/components/Layout/AppShell";
 
 export default function CraftingPage() {
   return (
