@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGameStore } from "./store/GameStore";
 import {
   fetchInventory,
@@ -17,10 +17,13 @@ export default function CharacterEntry({
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const setPlayer = useGameStore((s) => s.setPlayer);
 
   const handleStart = async () => {
-    if (!name.trim()) {
+    const trimmedName = name.trim();
+
+    if (!trimmedName) {
       setError("Enter a valid name.");
       return;
     }
@@ -30,38 +33,34 @@ export default function CharacterEntry({
 
     try {
       // Check if player exists
-      const checkRes = await fetch(
-        `/api/users?name=${encodeURIComponent(name.trim())}`
-      );
-      const checkData = await checkRes.json();
+      const checkRes = await fetch(`/api/users?name=${encodeURIComponent(trimmedName)}`);
+      const { exists } = await checkRes.json();
 
-      if (!checkData.exists) {
-        // Create new player
+      // Create if not exists
+      if (!exists) {
         const createRes = await fetch("/api/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name.trim() }),
+          body: JSON.stringify({ name: trimmedName }),
         });
 
-        if (!createRes.ok) {
-          const createData = await createRes.json();
-          throw new Error(createData.error || "Error creating player.");
-        }
+        const createData = await createRes.json();
+        if (!createRes.ok) throw new Error(createData.error || "Error creating player.");
       }
 
-      // Success: set player in Zustand store
-      setPlayer(name.trim());
+      // Set player globally
+      setPlayer(trimmedName);
 
-      // Load all player data concurrently
+      // Fetch all player-related data
       await Promise.all([
-        fetchInventory(name.trim()),
-        fetchXP(name.trim()),
-        fetchBlueprints(name.trim()),
-        fetchFactionClass(name.trim()),
+        fetchInventory(trimmedName),
+        fetchXP(trimmedName),
+        fetchBlueprints(trimmedName),
+        fetchFactionClass(trimmedName),
       ]);
 
-      // Callback for parent component to proceed
-      await onEnter(name.trim());
+      // Notify parent that entry succeeded
+      await onEnter(trimmedName);
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
