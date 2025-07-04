@@ -7,7 +7,7 @@ import { Card } from "../../components/ui/Card";
 import { Modal } from "../../components/ui/modal";
 
 export default function CraftingPage() {
-  const player = usePlayerStore((state) => state.name);
+  const player = usePlayerStore((state) => state.player);
   const inventory = usePlayerStore((state) => state.inventory);
   const setInventory = usePlayerStore((state) => state.addToInventory);
   const removeFromInventory = usePlayerStore((state) => state.removeFromInventory);
