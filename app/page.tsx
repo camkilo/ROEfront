@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client';
 
-import GameDashboard from '../src/components/GameDashboard';
+import GameDashboard from '../src/components/Dashboard/GameDashboard';
 
 export default function Home() {
   return (
