@@ -1,4 +1,4 @@
-import WorldMapPanel from "../../components/World/WorldMapPanel";
+import WorldMapPanel from "../../src/components/World/WorldMapPanel";
 
 export default function WorldPage() {
   return (
