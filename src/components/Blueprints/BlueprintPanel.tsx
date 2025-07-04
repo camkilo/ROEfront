@@ -1,8 +1,18 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 
-export default function BlueprintPanel() {
-  const [blueprints, setBlueprints] = useState<any>({});
+type Props = {
+  player: string;
+};
+
+type Blueprint = {
+  ingredients: string[];
+  discovered_by: string[];
+};
+
+export default function BlueprintPanel({ player }: Props) {
+  const [blueprints, setBlueprints] = useState<Record<string, Blueprint>>({});
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -15,9 +25,9 @@ export default function BlueprintPanel() {
   }, []);
 
   const filtered = Object.entries(blueprints).filter(
-    ([id, val]: any) =>
+    ([id, val]) =>
       id.toLowerCase().includes(search.toLowerCase()) ||
-      val.ingredients.some((i: string) =>
+      val.ingredients.some((i) =>
         i.toLowerCase().includes(search.toLowerCase())
       )
   );
@@ -40,7 +50,7 @@ export default function BlueprintPanel() {
         <p className="text-zinc-400">No matching blueprints found.</p>
       ) : (
         <ul className="space-y-4">
-          {filtered.map(([id, { ingredients, discovered_by }]: any) => (
+          {filtered.map(([id, { ingredients, discovered_by }]) => (
             <li
               key={id}
               className="p-4 border border-zinc-700 rounded-lg bg-zinc-800"
