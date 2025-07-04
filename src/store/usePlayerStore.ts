@@ -18,6 +18,8 @@ interface PlayerState {
   setZone: (zone: string) => void;
   setFaction: (name: string) => void;
   setClassType: (type: string) => void;
+  addToInventory: (item: string) => void;
+  removeFromInventory: (item: string) => void;
 }
 
 export const usePlayerStore = create<PlayerState>((set) => ({
@@ -38,4 +40,10 @@ export const usePlayerStore = create<PlayerState>((set) => ({
   setZone: (zone) => set({ zone }),
   setFaction: (name) => set({ faction: name }),
   setClassType: (type) => set({ classType: type }),
+  addToInventory: (item) =>
+    set((state) => ({ inventory: [...state.inventory, item] })),
+  removeFromInventory: (item) =>
+    set((state) => ({
+      inventory: state.inventory.filter((i) => i !== item),
+    })),
 }));
