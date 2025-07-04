@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useEffect } from "react";
-import { useGameStore } from "@/store/useGameStore";
+import { useGameStore } from "@/store/usePlayerStore";
 
 type Props = {
   children: ReactNode;
