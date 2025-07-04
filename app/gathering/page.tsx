@@ -8,7 +8,7 @@ export default function GatheringPage() {
   return (
     <AppShell>
       <main className="min-h-screen p-10 bg-gradient-to-br from-black to-zinc-900">
-        <GatheringPanel player={player} />
+        <GatheringPanel player={player ?? ""} />
       </main>
     </AppShell>
   );
