@@ -1,6 +1,6 @@
 "use client";
 
-import { useGameStore } from "@/store/gameStore";
+import { useGameStore } from "./store/GameStore";
 
 export default function PlayerProgress() {
   const xp = useGameStore((s) => s.xp);
