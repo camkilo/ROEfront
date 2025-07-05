@@ -1,4 +1,4 @@
-import api from "./api/Client";
+import api from "./Client";
 import { loadPlayerState } from "./api/playerState";
 
 export async function loginUser(username: string, password: string) {
