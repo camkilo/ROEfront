@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // useRouter from 'next/navigation' for app dir
-import api from "../lib/api/Client";
-import { useGameStore } from "../store/GameStore";
-import { Button } from "../components/ui/button";
+import api from "../../lib/api/Client";
+import { useGameStore } from "../src/components/store/GameStore";
+import { Button } from "../src/components/ui/button";
 
 export default function LoginPage() {
   const router = useRouter();
