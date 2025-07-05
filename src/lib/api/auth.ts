@@ -1,5 +1,5 @@
 import api from "./Client";
-import { loadPlayerState } from "./playerState";
+import { loadPlayerState } from "./loadPlayerState";
 
 export async function loginUser(username: string, password: string) {
   const res = await api.post("/login", { username, password });
