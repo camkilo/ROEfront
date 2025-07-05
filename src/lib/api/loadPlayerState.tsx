@@ -1,4 +1,4 @@
-import { usePlayerStore } from "../store/usePlayerStore";
+import { usePlayerStore } from "../../store/usePlayerStore";
 
 export function loadPlayerState(playerData: {
   player: string;
