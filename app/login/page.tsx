@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../src/lib/api/Client";
 import { usePlayerStore } from "../../src/store/usePlayerStore";
@@ -24,14 +24,6 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("playerEmail");
-    if (saved) {
-      setName(saved);
-      router.push("/game");
-    }
-  }, [router, setName]);
-
   const clearForm = () => {
     setEmail("");
     setPassword("");
@@ -50,14 +42,14 @@ export default function LoginPage() {
 
       if (mode === "login") {
         setName(data.player || email);
-        setInventory(data.inventory || []);
-        setKnownItems(data.known_items || []);
-        setKnownBlueprints(data.known_blueprints || []);
-        setXP(data.xp || 0);
-        setLevel(data.level || 1);
-        setFaction(data.faction || null);
-        setClassType(data.classType || null);
-        setZone(data.zone || "starter-zone");
+        if (data.inventory) setInventory(data.inventory);
+        if (data.known_items) setKnownItems(data.known_items);
+        if (data.known_blueprints) setKnownBlueprints(data.known_blueprints);
+        if (data.xp !== undefined) setXP(data.xp);
+        if (data.level !== undefined) setLevel(data.level);
+        if (data.faction) setFaction(data.faction);
+        if (data.classType) setClassType(data.classType);
+        if (data.zone) setZone(data.zone);
 
         localStorage.setItem("playerEmail", email);
         router.push("/game");
@@ -88,7 +80,7 @@ export default function LoginPage() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-4 focus:ring-purple-400 dark:focus:ring-pink-500 transition"
+            className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-400 dark:focus:ring-pink-500 transition"
             disabled={loading}
           />
 
@@ -99,7 +91,7 @@ export default function LoginPage() {
             autoComplete={mode === "login" ? "current-password" : "new-password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-4 focus:ring-purple-400 dark:focus:ring-pink-500 transition"
+            className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-400 dark:focus:ring-pink-500 transition"
             disabled={loading}
           />
 
