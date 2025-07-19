@@ -2,15 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    styledComponents: false, // ✅ keep if using styled-components (optional)
+    styledComponents: false,
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // ✅ allows images from any domain
+        hostname: "**",
       },
     ],
+  },
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL, // ✅ add this
   },
 };
 
