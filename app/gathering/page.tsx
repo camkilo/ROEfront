@@ -1,7 +1,7 @@
 "use client";
-import GatheringPanel from "../../src/components/Gathering/GatheringPanel";
-import AppShell from "../../src/components/Layout/AppShell";
-import { useGameStore } from "../../src/components/store/GameStore";
+import GatheringPanel from "@/components/Gathering/GatheringPanel";
+import AppShell from "@/components/Layout/AppShell";
+import { usePlayerStore } from "@/components/store/usePlayerStore";
 
 export default function GatheringPage() {
   const player = useGameStore((state) => state.player);
