@@ -2,7 +2,7 @@
 
 import CraftingPanel from "@/components/Crafting/CraftingPanel";
 import AppShell from "@/components/Layout/AppShell";
-import { useGameStore } from "@/components/store/useGameStore";
+import { useGameStore } from "@/components/store/GameStore";
 
 export default function CraftingPage() {
   const player = useGameStore((s) => s.player);
