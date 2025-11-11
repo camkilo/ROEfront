@@ -2,7 +2,7 @@
 
 import BlueprintPanel from "@/components/Blueprints/BlueprintPanel";
 import AppShell from "@/components/Layout/AppShell";
-import { usegamestore } from "@/components/store/GameStore";
+import { useGameStore } from "@/components/store/GameStore";
 
 export default function BlueprintPage() {
   const player = useGameStore((s) => s.player);
