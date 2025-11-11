@@ -2,7 +2,7 @@
 import './globals.css';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import AppShell from '@/src/components/Layout/AppShell';
+import AppShell from '@/components/Layout/AppShell';
 
 export const metadata: Metadata = {
   title: 'Realm of Echoes',
