@@ -1,8 +1,8 @@
 "use client";
 
-import CraftingPanel from "../../src/components/Crafting/CraftingPanel";
-import AppShell from "../../src/components/Layout/AppShell";
-import { useGameStore } from "../../src/components/store/GameStore";
+import CraftingPanel from "@/components/Crafting/CraftingPanel";
+import AppShell from "@/components/Layout/AppShell";
+import { usePlayerStore } from "@/components/store/usePlayerStore";
 
 export default function CraftingPage() {
   const player = useGameStore((s) => s.player);
