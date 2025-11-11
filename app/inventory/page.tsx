@@ -1,7 +1,7 @@
 "use client";
 import AppShell from "@/components/Layout/AppShell";
 import InventoryPanel from "@/components/InventoryPanel";
-import { usePlayerStore } from "@/components/store/";
+import { usePlayerStore } from "@/components/store/usePlayerStore";
 
 export default function InventoryPage() {
   const player = useGameStore((state) => state.player);
