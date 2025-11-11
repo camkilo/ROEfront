@@ -1,8 +1,8 @@
 "use client";
 
-import BlueprintPanel from "../../src/components/Blueprints/BlueprintPanel";
-import AppShell from "../../src/components/Layout/AppShell";
-import { useGameStore } from "../../src/components/store/GameStore";
+import BlueprintPanel from "@/components/Blueprints/BlueprintPanel";
+import AppShell from "@/components/Layout/AppShell";
+import { usePlayerStore } from "@/components/store/usePlayerStore";
 
 export default function BlueprintPage() {
   const player = useGameStore((s) => s.player);
